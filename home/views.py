@@ -2,34 +2,39 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import (
     Blog,
     Area,
+    Comment,
 )
 
 from .forms import (
     CreateBlog,
     UpdateBlog,
+    CreateComment,
 )
 
+
 def index(request):
-    blogs = Blog.objects.all()
-    context = {
-        'blogs' : blogs
-    }
-    return render(request, "home/blogs.html", context)
+    if request.user.is_authenticated:
+        blogs = Blog.objects.all()
+        context = {
+            'blogs': blogs
+        }
+        return render(request, "home/blogs.html", context)
+    return redirect('login')
+
 
 def create_blog(request):
-
     if request.method == 'POST':
         title = request.POST['title']
         body = request.POST['body']
         Blog.objects.create(
-            title = title,
-            body = body,
+            title=title,
+            body=body,
         )
         return redirect('http://localhost:8000/')
 
     form = CreateBlog()
     context = {
-        'form':form
+        'form': form
     }
     return render(request, "home/create_form.html", context)
 
@@ -62,8 +67,36 @@ def delete_blog(request, id):
 def area_show(request):
     areas = Area.objects.all()
     context = {
-        'areas':areas
+        'areas': areas
     }
     return render(request, "home/area.html", context)
 
 
+def blog_comment(request, id):
+
+    if request.method == "POST":
+        author = request.POST['athor']
+        body = request.POST['body']
+        blog = Blog.objects.get(id=id)
+        Comment.objects.create(
+            blog = blog,
+            athor = author,
+            body = body)
+
+    blog = Blog.objects.get(id=id)
+    comments = Comment.objects.filter(blog=blog)
+    form = CreateComment()
+    context = {
+        'id':id,
+        'comments':comments,
+        'form':form
+    }
+    return render(request, "home/comment.html", context)
+
+
+def create_comment(request, id):
+    form = CreateComment()
+    context = {
+        'form': form
+    }
+    return render(request, "home/create_comment.html", context)

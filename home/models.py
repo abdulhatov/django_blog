@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Blog(models.Model):
     # title талаасы 100 симболду батыра алат.
     title = models.CharField(max_length=100)
@@ -16,3 +15,12 @@ class Area(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    athor = models.CharField(max_length=100)
+    body = models.TextField()
+
+    def __str__(self):
+        return self.athor

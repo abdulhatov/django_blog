@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+  <link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+
+<div class="menu">
+  <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit">
+  </form>
+</div>
+
+  {% for comment in comments %}
+<div class="blog-wrapper">
+  <div class="blog-card">
+    <div class="card-img">
+      <h1>{{comment.title}}</h1>
+    </div>
+    <div class="card-details"><span><i class="fa fa-calendar"></i>{{comment.athor}}</span><span><i class="fa fa-heart"></i></span></div>
+    <div class="card-text"><p>{{comment.body}}</p></div>
+    <div class="read-more">
+    </div>
+  </div>
+  </div>
+  {% endfor %}
+</body>
+</html>

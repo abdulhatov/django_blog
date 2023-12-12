@@ -6,4 +6,4 @@
 # Коз карандылыктарды (dependens) бир файлга жазуу.
 2) />  pip freeze > requirements.txt
 
-3)
+3) git init, git commit -m "commit", git remote add origin <URL>, git push

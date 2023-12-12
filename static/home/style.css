@@ -3,14 +3,14 @@
 
 body{
   background:#ececec;
-  width: 100%;
+  width: 70%;
 }
 
 .menu{
     float:left;
     margin-top: 20px;
-    width: 200px;
-    height: 400px;
+    width: 150px;
+    height: 300px;
 }
 
 ul {
@@ -50,15 +50,15 @@ h1{
 
 .blog-wrapper{
   padding:15px;
-  margin-left: 200px;
+  margin-left: 270px;
   display:flex;
   flex-direction:row;
   justify-content:center;
   flex-wrap:wrap;
   .blog-card{
     @include transition(.3s);
-    max-width:900px;
-    min-width:900px;
+    max-width:500px;
+    min-width:500px;
     margin:15px;
     background:#fff;
     border:1px solid #CB6074;

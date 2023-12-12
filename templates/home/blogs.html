@@ -10,17 +10,19 @@
 
 
 <div class="menu">
-  <h1>MENU</h1>
+  {% if request.user.is_authenticated %}
+  <h1>{{ request.user }}</h1>
+  {% endif %}
   <ul>
     <li><a class="active" href="#home">Home</a></li>
     <li><a href="http://localhost:8000/">Counties</a></li>
     <li><a href="http://localhost:8000/area/">Areas</a></li>
     <li><a href="#contact">Regions</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="{% url 'logout' %}">log out</a></li>
   </ul>
 
 </div>
-
 
 <div class="my_button_create">
   <button><a href="http://localhost:8000/create/">Create</a></button>
@@ -37,9 +39,11 @@
     <div class="read-more">
       <a href="http://localhost:8000/update/{{blog.pk}}">Update</a>
     </div>
-
     <div class="read-more">
       <a href="http://localhost:8000/delete/{{blog.pk}}">Delete</a>
+    </div>
+    <div class="read-more">
+      <a href="http://localhost:8000/blog_comment/{{blog.pk}}">Comment</a>
     </div>
 
   </div>
